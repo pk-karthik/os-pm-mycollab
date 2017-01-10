@@ -30,38 +30,42 @@ import java.util.List;
  * @author MyCollab Ltd
  * @since 5.4.6
  */
-public class MilestoneOrderGroup extends TicketGroupOrderComponent {
-    private SortedArrayMap<String, DefaultTicketGroupComponent> milestonesAvailable = new SortedArrayMap<>();
-    private DefaultTicketGroupComponent unspecifiedTasks;
+class MilestoneOrderGroup extends TicketGroupOrderComponent {
+    private SortedArrayMap<Integer, MilestoneTicketGroupComponent> milestonesAvailable = new SortedArrayMap<>();
+    private MilestoneTicketGroupComponent unspecifiedTickets;
 
     @Override
     public void insertTickets(List<ProjectTicket> tickets) {
         for (ProjectTicket ticket : tickets) {
-            String milestoneName = ticket.getMilestoneName();
-            if (milestoneName != null) {
-                if (milestonesAvailable.containsKey(milestoneName)) {
-                    DefaultTicketGroupComponent groupComponent = milestonesAvailable.get(milestoneName);
+            Integer milestoneId = ticket.getMilestoneId();
+            if (milestoneId != null) {
+                if (milestonesAvailable.containsKey(milestoneId)) {
+                    MilestoneTicketGroupComponent groupComponent = milestonesAvailable.get(milestoneId);
                     groupComponent.insertTicket(ticket);
                 } else {
                     Div milestoneDiv = new DivLessFormatter().appendChild(new Text(" " + ticket.getMilestoneName()));
 
-                    DefaultTicketGroupComponent groupComponent = new DefaultTicketGroupComponent(milestoneDiv.write());
-                    milestonesAvailable.put(milestoneName, groupComponent);
-                    int index = milestonesAvailable.getKeyIndex(milestoneName);
+                    MilestoneTicketGroupComponent groupComponent = new MilestoneTicketGroupComponent(milestoneDiv.write(), milestoneId);
+                    milestonesAvailable.put(milestoneId, groupComponent);
+                    int index = milestonesAvailable.getKeyIndex(milestoneId);
                     if (index > -1) {
                         addComponent(groupComponent, index);
                     } else {
-                        addComponent(groupComponent);
+                        if (unspecifiedTickets != null) {
+                            addComponent(groupComponent, getComponentCount() - 1);
+                        } else {
+                            addComponent(groupComponent);
+                        }
                     }
 
                     groupComponent.insertTicket(ticket);
                 }
             } else {
-                if (unspecifiedTasks == null) {
-                    unspecifiedTasks = new DefaultTicketGroupComponent(UserUIContext.getMessage(GenericI18Enum.OPT_UNDEFINED));
-                    addComponent(unspecifiedTasks, 0);
+                if (unspecifiedTickets == null) {
+                    unspecifiedTickets = new MilestoneTicketGroupComponent(UserUIContext.getMessage(GenericI18Enum.OPT_UNDEFINED), null);
+                    addComponent(unspecifiedTickets);
                 }
-                unspecifiedTasks.insertTicket(ticket);
+                unspecifiedTickets.insertTicket(ticket);
             }
         }
     }

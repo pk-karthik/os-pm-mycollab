@@ -50,10 +50,7 @@ import com.mycollab.vaadin.web.ui.field.ContainerViewField;
 import com.mycollab.vaadin.web.ui.grid.GridFormLayoutHelper;
 import com.vaadin.server.FontAwesome;
 import com.vaadin.shared.ui.label.ContentMode;
-import com.vaadin.ui.Alignment;
-import com.vaadin.ui.ComponentContainer;
-import com.vaadin.ui.Field;
-import com.vaadin.ui.VerticalLayout;
+import com.vaadin.ui.*;
 import com.vaadin.ui.themes.ValoTheme;
 import org.apache.commons.collections.CollectionUtils;
 import org.vaadin.viritin.button.MButton;
@@ -73,7 +70,6 @@ public class BugPreviewForm extends AdvancedPreviewBeanForm<SimpleBug> {
     }
 
     private static class FormLayoutFactory extends AbstractFormLayoutFactory {
-        private static final long serialVersionUID = 1L;
         private GridFormLayoutHelper informationLayout;
 
         @Override
@@ -110,10 +106,10 @@ public class BugPreviewForm extends AdvancedPreviewBeanForm<SimpleBug> {
             } else if (SimpleBug.Field.fixedVersions.equalTo(propertyId)) {
                 return informationLayout.addComponent(field, UserUIContext.getMessage(BugI18nEnum.FORM_FIXED_VERSIONS),
                         UserUIContext.getMessage(BugI18nEnum.FORM_FIXED_VERSIONS_HELP), 0, 8, 2, "100%");
-            } else if (BugWithBLOBs.Field.estimatetime.equalTo(propertyId)) {
+            } else if (BugWithBLOBs.Field.originalestimate.equalTo(propertyId)) {
                 return informationLayout.addComponent(field, UserUIContext.getMessage(BugI18nEnum.FORM_ORIGINAL_ESTIMATE),
                         UserUIContext.getMessage(BugI18nEnum.FORM_ORIGINAL_ESTIMATE_HELP), 0, 9);
-            } else if (BugWithBLOBs.Field.estimateremaintime.equalTo(propertyId)) {
+            } else if (BugWithBLOBs.Field.remainestimate.equalTo(propertyId)) {
                 informationLayout.addComponent(field, UserUIContext.getMessage(BugI18nEnum.FORM_REMAIN_ESTIMATE),
                         UserUIContext.getMessage(BugI18nEnum.FORM_REMAIN_ESTIMATE_HELP), 1, 9);
             } else if (BugWithBLOBs.Field.id.equalTo(propertyId)) {
@@ -123,7 +119,7 @@ public class BugPreviewForm extends AdvancedPreviewBeanForm<SimpleBug> {
         }
 
         @Override
-        public ComponentContainer getLayout() {
+        public AbstractComponent getLayout() {
             final VerticalLayout layout = new VerticalLayout();
             informationLayout = GridFormLayoutHelper.defaultFormLayoutHelper(2, 11);
             layout.addComponent(informationLayout.getLayout());

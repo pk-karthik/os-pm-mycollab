@@ -90,6 +90,10 @@ public class ProjectTicket extends ValuedBean implements Serializable {
 
     private Integer numComments;
 
+    private Double originalestimate;
+
+    private Double remainestimate;
+
     public String getName() {
         return name;
     }
@@ -366,6 +370,22 @@ public class ProjectTicket extends ValuedBean implements Serializable {
         this.createdUserAvatarId = createdUserAvatarId;
     }
 
+    public Double getOriginalestimate() {
+        return originalestimate;
+    }
+
+    public void setOriginalestimate(Double originalestimate) {
+        this.originalestimate = originalestimate;
+    }
+
+    public Double getRemainestimate() {
+        return remainestimate;
+    }
+
+    public void setRemainestimate(Double remainestimate) {
+        this.remainestimate = remainestimate;
+    }
+
     public static Task buildTask(ProjectTicket bean) {
         Task task = new Task();
         task.setId(bean.getTypeId());
@@ -378,6 +398,7 @@ public class ProjectTicket extends ValuedBean implements Serializable {
         task.setSaccountid(bean.getsAccountId());
         task.setPriority(bean.getPriority());
         task.setAssignuser(bean.getAssignUser());
+        task.setMilestoneid(bean.getMilestoneId());
         return task;
     }
 
@@ -393,6 +414,7 @@ public class ProjectTicket extends ValuedBean implements Serializable {
         bug.setPriority(bean.getPriority());
         bug.setSaccountid(bean.getsAccountId());
         bug.setAssignuser(bean.getAssignUser());
+        bug.setMilestoneid(bean.getMilestoneId());
         return bug;
     }
 
@@ -408,6 +430,7 @@ public class ProjectTicket extends ValuedBean implements Serializable {
         risk.setSaccountid(bean.getsAccountId());
         risk.setPriority(bean.getPriority());
         risk.setAssignuser(bean.getAssignUser());
+        risk.setMilestoneid(bean.getMilestoneId());
         return risk;
     }
 }

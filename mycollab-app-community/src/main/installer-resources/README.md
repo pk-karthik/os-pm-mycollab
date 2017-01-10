@@ -40,43 +40,25 @@ understanding in a matter of minutes.
 Last changelog
 ==============
 
-Version 5.4.7
--------------
-
-**Library Upgrades**
-
-* Vaadin 7.7.6
-* Other libraries
-
-**Improvements & New Features**
-
-* Release notes of version, phase
-* Docker images for MyCollab
-* The test case type of ticket
-* Inline edit form field
-* [Premium] Group support
-* [Premium] Custom display fields of ticket dashboard
-* [Premium] Burndown chart of tickets
-* [Premium] The new epic, user stories types of ticket
-* Other minor improvements
-
-**Bug Fixes**
-
 Version 5.4.6
 -------------
 
 **Library Upgrades**
 
-* Vaadin 7.7.5
+* Vaadin 7.7.6, Jackrabbit 2.14.0
 * Other libraries
 
 **Improvements & New Features**
 
 * Easy to navigate project tickets
+* Kanban board categorize by users
+* Drag & drop support in ticket dashboard
+* Update language files
 * Other minor improvements
 
 **Bug Fixes**
 
+* Can not install two different MyCollab instances on the same server
 
 
 Version 5.4.5
@@ -99,7 +81,7 @@ Version 5.4.5
 
 **Bug Fixes**
 
-* Go to previous entry of task, bug go to the fifirst entry
+* Go to previous entry of task, bug go to the first entry
 * Unresolved tickets display wrong entries
 * Throw error when user enter the empty page view without having the write permission
 
